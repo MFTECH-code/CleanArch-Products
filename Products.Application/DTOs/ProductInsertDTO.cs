@@ -2,7 +2,7 @@
 
 namespace Products.Application.DTOs
 {
-    public class ProductInsertDTO
+    public sealed class ProductInsertDTO
     {
         [Required]
         [StringLength(255)]

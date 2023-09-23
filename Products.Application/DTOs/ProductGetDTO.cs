@@ -1,6 +1,6 @@
 ﻿namespace Products.Application.DTOs
 {
-    public class ProductGetDTO
+    public sealed class ProductGetDTO
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

@@ -13,11 +13,14 @@ namespace Products.Domain.Entities
         [Required]
         [StringLength(255)]
         public string Name { get; set; }
-        [Required]
-        [StringLength(255)]
         public string NormalizedName { get; set; }
         [Required]
         public decimal Price { get; set; }
         public int Stock { get; set; } = 0;
+
+        public void SetNormalizedName()
+        {
+            Name.ToLower().Replace(" ", "_").Trim();
+        }
     }
 }

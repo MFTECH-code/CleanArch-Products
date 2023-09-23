@@ -17,6 +17,7 @@ namespace Products.Persistence.Repositories
         public void Create(Product product)
         {
             product.CreatedDate = DateTime.UtcNow;
+            product.SetNormalizedName();
             _appDbContext.Add(product);
         }
 
@@ -43,6 +44,7 @@ namespace Products.Persistence.Repositories
         public void Update(Product product)
         {
             product.UpdatedDate = DateTime.UtcNow;
+            product.SetNormalizedName();
             _appDbContext.Update(product);
         }
     }
