@@ -1,14 +1,14 @@
-﻿using Products.Domain.DTOs;
-using Products.Domain.Entities;
+﻿using Products.Domain.Entities;
+
 namespace Products.Domain.Interfaces.Repositories
 {
     public interface IProductRepository
     {
-        Task<Product> GetByIdAsync(Guid id);
-        Task<IEnumerable<Product>> GetAllAsync(PaginatedFilter paginatedFilter);
-        Task<Product> GetByNormalizedNameAsync(string normalizedName);
-        Task CreateAsync(Product product);
-        Task UpdateAsync(Product product);
-        Task DeleteAsync(Guid id);
+        Task<Product> GetByIdAsync(Guid id, CancellationToken cancellationToken);
+        Task<IEnumerable<Product>> GetAllAsync(CancellationToken cancellationToken);
+        void Create(Product product);
+        void Update(Product product);
+        void Delete(Product product);
+        Task<Product> GetByNormalizedNameAsync(string normalizedName, CancellationToken cancellationToken);
     }
 }

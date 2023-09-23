@@ -2,7 +2,7 @@
 
 namespace Products.Domain.Entities
 {
-    public class Product
+    public sealed class Product
     {
         [Required]
         public Guid Id { get; set; }
