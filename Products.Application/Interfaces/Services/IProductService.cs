@@ -7,7 +7,7 @@ namespace Products.Application.Interfaces.Services
         #region Basic CRUD Operations
         Task<ProductGetDTO> GetProductByIdAsync(Guid id , CancellationToken cancellationToken);
         Task<IEnumerable<ProductGetDTO>> GetAllAsync(CancellationToken cancellationToken);
-        Task CreateAsync(ProductInsertDTO productInsertDTO, CancellationToken cancellationToken);
+        Task<ProductGetDTO> CreateAsync(ProductInsertDTO productInsertDTO, CancellationToken cancellationToken);
         Task UpdateAsync(ProductInsertDTO productInsertDTO, Guid Id, CancellationToken cancellationToken);
         Task DeleteAsync(Guid id, CancellationToken cancellationToken);
         #endregion

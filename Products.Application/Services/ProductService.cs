@@ -30,11 +30,12 @@ namespace Products.Application.Services
             await _unitOfWork.CommitAsync(cancellationToken);
         }
 
-        public async Task CreateAsync(ProductInsertDTO productInsertDTO, CancellationToken cancellationToken)
+        public async Task<ProductGetDTO> CreateAsync(ProductInsertDTO productInsertDTO, CancellationToken cancellationToken)
         {
             var product = _mapper.Map<Product>(productInsertDTO);
-            _productRepository.Create(product);
+            var createdProduct = _productRepository.Create(product);
             await _unitOfWork.CommitAsync(cancellationToken);
+            return _mapper.Map<ProductGetDTO>(createdProduct);
         }
 
         public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
@@ -61,7 +62,7 @@ namespace Products.Application.Services
 
         public async Task<ProductGetDTO> GetProductByIdAsync(Guid id, CancellationToken cancellationToken)
         {
-            var product = _productRepository.GetByIdAsync(id, cancellationToken);
+            var product = await _productRepository.GetByIdAsync(id, cancellationToken);
             if (product == null) throw new NotFoundException("Product not found");
             return _mapper.Map<ProductGetDTO>(product);
         }
@@ -79,9 +80,12 @@ namespace Products.Application.Services
         {
             var product = await _productRepository.GetByIdAsync(id, cancellationToken);
             if (product == null) throw new NotFoundException("Product not found");
-            var productUpdated = _mapper.Map<Product>(productInsertDTO);
-            productUpdated.CreatedDate = product.CreatedDate;
-            _productRepository.Update(product);
+            // TODO: Refatorar futuramente para melhorar a manutenção deste código
+            var productUpdated = product;
+            productUpdated.Name = productInsertDTO.Name;
+            productUpdated.Stock = productInsertDTO.Stock;
+            product.Price = productInsertDTO.Price;
+            _productRepository.Update(productUpdated);
             await _unitOfWork.CommitAsync(cancellationToken);
         }
     }

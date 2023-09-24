@@ -6,7 +6,7 @@ namespace Products.Domain.Interfaces.Repositories
     {
         Task<Product> GetByIdAsync(Guid id, CancellationToken cancellationToken);
         Task<IEnumerable<Product>> GetAllAsync(CancellationToken cancellationToken);
-        void Create(Product product);
+        Product Create(Product product);
         void Update(Product product);
         void Delete(Product product);
         Task<Product> GetByNormalizedNameAsync(string normalizedName, CancellationToken cancellationToken);

@@ -14,11 +14,12 @@ namespace Products.Persistence.Repositories
             _appDbContext = appDbContext;
         }
 
-        public void Create(Product product)
+        public Product Create(Product product)
         {
             product.CreatedDate = DateTime.UtcNow;
             product.SetNormalizedName();
             _appDbContext.Add(product);
+            return product;
         }
 
         public void Delete(Product product)

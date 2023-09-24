@@ -20,7 +20,7 @@ namespace Products.Domain.Entities
 
         public void SetNormalizedName()
         {
-            Name.ToLower().Replace(" ", "_").Trim();
+            NormalizedName = Name.ToLower().Replace(" ", "_").Trim();
         }
     }
 }
